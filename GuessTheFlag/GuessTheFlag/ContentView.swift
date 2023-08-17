@@ -7,6 +7,20 @@
 
 import SwiftUI
 
+struct ProminentTitle: ViewModifier {
+    func body(content: Content) -> some View {
+        content
+            .font(.largeTitle.bold())
+            .foregroundColor(.white)
+    }
+}
+
+extension View {
+    func prominentTitleStyle() -> some View {
+        self.modifier(ProminentTitle())
+    }
+}
+
 
 struct ContentView: View {
     
@@ -31,8 +45,7 @@ struct ContentView: View {
                 
                 Spacer()
                 Text("Guess the flag")
-                    .font(.largeTitle.bold())
-                    .foregroundColor(.white)
+                    .prominentTitleStyle()
             
                 VStack(spacing: 15) {
                     VStack {
@@ -50,10 +63,7 @@ struct ContentView: View {
                             flagTapped(number)
                            
                         } label: {
-                            Image(countries[number])
-                                .renderingMode(.original)
-                                .clipShape(Capsule())
-                                .shadow(radius: 5)
+                            FlagImage(imageName: countries[number])
                         }
                     }
             
@@ -85,6 +95,13 @@ struct ContentView: View {
             Text("Your score is \(userScore)")
         }
             
+    }
+    
+    func FlagImage(imageName: String) -> some View {
+        Image(imageName)
+            .renderingMode(.original)
+            .clipShape(Capsule())
+            .shadow(radius: 5)
     }
     
     func flagTapped(_ number: Int) {
