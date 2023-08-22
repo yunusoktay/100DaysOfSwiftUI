@@ -8,17 +8,14 @@
 import SwiftUI
 
 struct ContentView: View {
-    
-    @State private var sleepAmount = 8.0
-    
     var body: some View {
-        VStack {
-            Image(systemName: "globe")
-                .imageScale(.large)
-                .foregroundColor(.accentColor)
-            Text("Hello, world!")
-        }
-        .padding()
+        Text(Date.now.formatted(date: .long, time: .shortened))
+    }
+    
+    func trivialExample() {
+        let components = Calendar.current.dateComponents([.hour, .minute], from: Date.now)
+        let hour = components.hour ?? 0
+        let mibute = components.minute ?? 0
     }
 }
 
